@@ -9,7 +9,18 @@ from pydantic import BaseModel
 from typing import Optional
 from matplotlib import cm
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI()
+
+# Add CORS middleware to allow requests from anywhere
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allow all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all HTTP methods
+    allow_headers=["*"],  # Allow all headers
+)
 
 class ImageRequest(BaseModel):
     image: str  # Base64-encoded image string
